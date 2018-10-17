@@ -90,9 +90,9 @@ func startJava() {
 	cmd := runJavaCommandAsync(javaPath, args, cp)
 	listenForKillSignal(cmd)
 	go killIfGaugeIsDead(cmd) // Kills gauge-java.go process if gauge process i.e. parent process is already dead.
-
 	err := cmd.Wait()
-	if err != nil {
+
+	if err != nil || !cmd.ProcessState.Success() {
 		fmt.Printf("process %s with pid %d quit unexpectedly. %s\n", cmd.Path, cmd.Process.Pid, err.Error())
 		os.Exit(1)
 	}

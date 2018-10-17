@@ -99,9 +99,9 @@ public class MessageDispatcher {
             } catch (InvalidProtocolBufferException e) {
                 return;
             } catch (Throwable throwable) {
-                throwable.printStackTrace();
-                System.err.println(throwable.toString());
-                return;
+                System.err.println(throwable.getMessage());
+                throwable.printStackTrace(System.err);
+                System.exit(-1);
             }
         }
     }
