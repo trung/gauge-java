@@ -30,7 +30,11 @@ public class MessageCollector {
 
     Spec.ProtoExecutionResult addPendingMessages(Spec.ProtoExecutionResult result, List<String> messages) {
         Spec.ProtoExecutionResult.Builder builder = Spec.ProtoExecutionResult.newBuilder(result);
-        builder.addAllMessage(messages);
+        messages.forEach((m) -> {
+            if (m != null) {
+                builder.addMessage(m);
+            }
+        });
         return builder.build();
     }
 
